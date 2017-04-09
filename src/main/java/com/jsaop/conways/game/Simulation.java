@@ -19,27 +19,7 @@ public class Simulation {
     }
 
     public String getState() {
-        StringBuilder sb = new StringBuilder();
-        boolean[][] state = game.getState();
-
-        for(int y = 0; y < game.getHeight(); y++){
-            sb.append(makeFancyRow(state[y]));
-            sb.append('\n');
-        }
-
-        return sb.toString();
-    }
-
-    private String makeFancyRow(boolean[] row) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("[ ");
-        for (boolean b : row) {
-            sb.append(b ? '*' : '.');
-            sb.append(" ");
-        }
-        sb.append(']');
-        return sb.toString();
+        return game.getStateDiagram();
     }
 
     public static void main(String[] args) {

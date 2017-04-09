@@ -6,16 +6,17 @@ public class Game {
 
     private WorldState currentGen;
     private WorldState lastGen;
+    private int generation;
 
 
     public Game() {
-        this.currentGen = new WorldState(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        copyWorldState();
+        this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
     public Game(int width, int height) {
         this.currentGen = new WorldState(width, height);
-        this.lastGen = new WorldState(width, height);
+        copyWorldStateToLastGen();
+        this.generation = 0;
     }
 
     public void spawn(int x, int y) {
@@ -31,8 +32,9 @@ public class Game {
     }
 
     public void step() {
-        copyWorldState();
+        copyWorldStateToLastGen();
         determineCellFates();
+        generation++;
     }
 
     public int getWidth() {
@@ -49,6 +51,22 @@ public class Game {
 
     public boolean[][] getState() {
         return currentGen.getCells();
+    }
+
+    public String getStateDiagram() {
+        StringBuilder sb = new StringBuilder();
+        boolean[][] state = getState();
+
+        for (int y = 0; y < getHeight(); y++) {
+            sb.append(makeFancyRow(state[y]));
+            sb.append('\n');
+        }
+
+        return sb.toString();
+    }
+
+    public int getGeneration() {
+        return generation;
     }
 
     private void determineCellFates() {
@@ -74,8 +92,20 @@ public class Game {
         return neighbors < 2 || neighbors > 3;
     }
 
-    private void copyWorldState() {
+    private void copyWorldStateToLastGen() {
         lastGen = currentGen.copy();
     }
 
+
+    private String makeFancyRow(boolean[] row) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[ ");
+        for (boolean b : row) {
+            sb.append(b ? '*' : '.');
+            sb.append(" ");
+        }
+        sb.append(']');
+        return sb.toString();
+    }
 }
