@@ -8,11 +8,13 @@ public class WorldState {
     private final int width;
     private final int height;
     private boolean[][] cells;
+    private int population;
 
     public WorldState(int width, int height) {
         this.width = width;
         this.height = height;
         cells = new boolean[width][height];
+        population = 0;
     }
 
     public boolean[][] getCells() {
@@ -31,18 +33,31 @@ public class WorldState {
         return height;
     }
 
-
     public int getNumberCells() {
         return width * height;
     }
 
+    public int getPopulation() {
+        return population;
+    }
 
     public void spawn(int x, int y) {
-        cells[y][x] = true;
+        try {
+            cells[y][x] = true;
+            population++;
+        } catch (IndexOutOfBoundsException ex) {
+            throw new OutOfGameBoundsException(x, y);
+        }
     }
 
     public void kill(int x, int y) {
-        cells[y][x] = false;
+
+        try {
+            cells[y][x] = false;
+            population--;
+        } catch (IndexOutOfBoundsException ex) {
+            throw new OutOfGameBoundsException(x,y);
+        }
     }
 
     public boolean isAlive(int x, int y) {
@@ -61,7 +76,7 @@ public class WorldState {
                 if (isAlive(j, i))
                     ++count;
 
-        if(isAlive(x,y))
+        if (isAlive(x, y))
             count--;
 
         return count;
@@ -82,5 +97,28 @@ public class WorldState {
                 copy[x][y] = this.cells[x][y];
 
         return copy;
+    }
+
+    public String getStateDiagram() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int y = 0; y < getHeight(); y++) {
+            sb.append(makeFancyRow(cells[y]));
+            sb.append('\n');
+        }
+
+        return sb.toString();
+    }
+
+    private String makeFancyRow(boolean[] row) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[ ");
+        for (boolean b : row) {
+            sb.append(b ? '*' : '.');
+            sb.append(" ");
+        }
+        sb.append(']');
+        return sb.toString();
     }
 }

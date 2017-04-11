@@ -37,6 +37,48 @@ public class Game {
         generation++;
     }
 
+    public void spawnRPentomino(int x, int y) {
+        x = x - 2;
+        y = y - 2;
+        spawn(x + 2, y + 1);
+        spawn(x + 3, y + 1);
+        spawn(x + 1, y + 2);
+        spawn(x + 2, y + 2);
+        spawn(x + 2, y + 3);
+    }
+
+    public void spawnBlockLayingSwitch(int x, int y) throws OutOfGameBoundsException{
+        x = x - 5;
+        y = y - 5;
+        spawn(x + 8, y + 2);
+        spawn(x + 8, y + 3);
+        spawn(x + 8, y + 4);
+        spawn(x + 9, y + 3);
+        spawn(x + 6, y + 3);
+        spawn(x + 6, y + 4);
+        spawn(x + 6, y + 5);
+        spawn(x + 4, y + 6);
+        spawn(x + 4, y + 7);
+        spawn(x + 2, y + 7);
+    }
+
+    public void spawnGlider(int x, int y) throws OutOfGameBoundsException{
+        x = x -2;
+        y = y -2;
+        spawn(x + 0, y + 3);
+        spawn(x + 1, y + 3);
+        spawn(x + 2, y + 3);
+        spawn(x + 2, y + 2);
+        spawn(x + 1, y + 1);
+    }
+
+
+    public void spawnBlinker(int x, int y) throws OutOfGameBoundsException {
+        spawn(x - 1, y);
+        spawn(x, y);
+        spawn(x + 1, y);
+    }
+
     public int getWidth() {
         return currentGen.getWidth();
     }
@@ -54,19 +96,15 @@ public class Game {
     }
 
     public String getStateDiagram() {
-        StringBuilder sb = new StringBuilder();
-        boolean[][] state = getState();
-
-        for (int y = 0; y < getHeight(); y++) {
-            sb.append(makeFancyRow(state[y]));
-            sb.append('\n');
-        }
-
-        return sb.toString();
+        return currentGen.getStateDiagram();
     }
 
     public int getGeneration() {
         return generation;
+    }
+
+    public int getPopulation() {
+        return currentGen.getPopulation();
     }
 
     private void determineCellFates() {
@@ -92,20 +130,10 @@ public class Game {
         return neighbors < 2 || neighbors > 3;
     }
 
+
     private void copyWorldStateToLastGen() {
         lastGen = currentGen.copy();
     }
 
 
-    private String makeFancyRow(boolean[] row) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("[ ");
-        for (boolean b : row) {
-            sb.append(b ? '*' : '.');
-            sb.append(" ");
-        }
-        sb.append(']');
-        return sb.toString();
-    }
 }
