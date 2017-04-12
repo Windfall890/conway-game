@@ -103,10 +103,6 @@ public class Game {
         return generation;
     }
 
-    public int getPopulation() {
-        return currentGen.getPopulation();
-    }
-
     private void determineCellFates() {
         for (int y = 0; y < lastGen.getHeight(); y++)
             for (int x = 0; x < lastGen.getWidth(); x++)

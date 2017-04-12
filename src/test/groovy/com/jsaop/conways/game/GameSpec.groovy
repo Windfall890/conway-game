@@ -19,15 +19,6 @@ class GameSpec extends Specification {
             game.getHeight() == DEFAULT_HEIGHT
     }
 
-    def "Game provides current living population count"() {
-        when:
-            game.spawn(0,0)
-            game.spawn(1,1)
-            game.spawn(2,2)
-        then:
-            game.getPopulation() == 3
-    }
-
     def "Game provides cell number"() {
         expect:
             game.getNumberCells() == (DEFAULT_WIDTH * DEFAULT_HEIGHT)

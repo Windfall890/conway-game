@@ -8,13 +8,11 @@ public class WorldState {
     private final int width;
     private final int height;
     private boolean[][] cells;
-    private int population;
 
     public WorldState(int width, int height) {
         this.width = width;
         this.height = height;
-        cells = new boolean[width][height];
-        population = 0;
+        cells = new boolean[height][width];
     }
 
     public boolean[][] getCells() {
@@ -37,14 +35,9 @@ public class WorldState {
         return width * height;
     }
 
-    public int getPopulation() {
-        return population;
-    }
-
     public void spawn(int x, int y) {
         try {
             cells[y][x] = true;
-            population++;
         } catch (IndexOutOfBoundsException ex) {
             throw new OutOfGameBoundsException(x, y);
         }
@@ -54,7 +47,6 @@ public class WorldState {
 
         try {
             cells[y][x] = false;
-            population--;
         } catch (IndexOutOfBoundsException ex) {
             throw new OutOfGameBoundsException(x,y);
         }
@@ -90,11 +82,11 @@ public class WorldState {
     }
 
     private boolean[][] copyCells() {
-        boolean[][] copy = new boolean[width][height];
+        boolean[][] copy = new boolean[height][width];
 
         for (int y = 0; y < this.height; y++)
             for (int x = 0; x < this.width; x++)
-                copy[x][y] = this.cells[x][y];
+                copy[y][x] = this.cells[y][x];
 
         return copy;
     }
