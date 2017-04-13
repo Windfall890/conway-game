@@ -95,20 +95,4 @@ class GameSpec extends Specification {
             game.isAlive(1, 1)
 
     }
-
-    def "spawnBlinker spawns three cells at x, y coordinate"() {
-        when:
-            game.spawnBlinker(1, 1)
-        then:
-            game.isAlive(0, 1)
-            game.isAlive(1, 1)
-            game.isAlive(2, 1)
-    }
-
-    def "spawnBlockLayingSwitch throws out of bounds exception if would violate game border"() {
-        when:
-            game.spawnRPentomino(-1,-1)
-        then:
-            thrown OutOfGameBoundsException
-    }
 }

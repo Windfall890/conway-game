@@ -1,24 +1,22 @@
 package com.jsaop.conways.game;
 
-/**
- * Created by jsaop on 4/11/17.
- */
 public class ConwayStructureGenerator {
 
     public static final String GLIDER_GUN = createGliderGunString();
     public static final String R_PENTOMINO = createRPentomino();
-    public static final String BLOCK_LAYING_SWITCH = "";
+    public static final String BLOCK_LAYING_SWITCH = createBlockLayingSwitchString();
 
     private Game game;
-
 
     public ConwayStructureGenerator(Game game) {
         this.game = game;
     }
 
+
     public void spawnFromString(String pattern){
         spawnFromStringAtOffset(pattern, 0, 0);
     }
+
     public void spawnFromStringAtOffset(String pattern, int xOffset, int yOffset) {
         int rowIndex = xOffset;
         int colIndex = yOffset;
@@ -42,7 +40,6 @@ public class ConwayStructureGenerator {
         }
 
     }
-
     private static String createRPentomino() {
         StringBuilder sb = new StringBuilder();
 
@@ -68,6 +65,17 @@ public class ConwayStructureGenerator {
                 "...........*...*\n" +
                 "............**"
         );
+        return sb.toString();
+    }
+
+    private static String createBlockLayingSwitchString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("......*.\n");
+        sb.append("....*.**\n");
+        sb.append("....*.*.\n");
+        sb.append("....*...\n");
+        sb.append("..*.....\n");
+        sb.append("*.*.....\n");
         return sb.toString();
     }
 
