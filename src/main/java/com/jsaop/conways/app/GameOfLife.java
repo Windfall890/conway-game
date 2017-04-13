@@ -18,9 +18,9 @@ import javafx.util.Duration;
 public class GameOfLife extends Application {
     public static final Color CELL_FILL_COLOR = Color.AQUA;
     public static final int CELLS_WIDE = 100;
-    public static final int CELLS_HIGH = 50;
-    public static final int CELL_DIMENSION = 5;
-    public static final long DEFAULT_FRAME_DELAY = 50;
+    public static final int CELLS_HIGH = 100;
+    public static final int CELL_DIMENSION = 10;
+    public static final long DEFAULT_FRAME_DELAY = 70;
 
     private Game game;
     private GridPane grid;
@@ -42,6 +42,7 @@ public class GameOfLife extends Application {
         ConwayStructureGenerator generator = new ConwayStructureGenerator(game);
         generator.spawnFromStringAtOffset(ConwayStructureGenerator.GLIDER_GUN, 2, 12);
 //        generator.spawnFromStringAtOffset(ConwayStructureGenerator.R_PENTOMINO, CELLS_WIDE/2, CELLS_HIGH/2);
+//        generator.spawnFromString(".*\n.*\n.*");
 
         System.out.println(game.getStateDiagram());
 
@@ -56,8 +57,6 @@ public class GameOfLife extends Application {
                 createGridCell(x, y);
             }
         }
-
-
 
         generation = new Text();
 
@@ -95,8 +94,8 @@ public class GameOfLife extends Application {
         Rectangle r = new Rectangle();
         r.setOnMouseClicked(event -> {
             game.spawn(x, y);
-            r.setFill(CELL_FILL_COLOR);
-            r.setStroke(CELL_FILL_COLOR);
+            r.setFill(Color.BLUEVIOLET);
+            r.setStroke(Color.BLUEVIOLET);
         });
         r.setWidth(CELL_DIMENSION);
         r.setHeight(CELL_DIMENSION);
@@ -134,11 +133,24 @@ public class GameOfLife extends Application {
     private void updateCell(int x, int y) {
         Rectangle r = getRectangle(x, y);
         if (game.isAlive(x, y)) {
+            if(r.getFill() == Color.BLACK){
+                r.setFill(Color.AZURE);
+                r.setStroke(Color.AZURE);
+            }else {
             r.setFill(CELL_FILL_COLOR);
             r.setStroke(CELL_FILL_COLOR);
+            }
         } else {
-            r.setFill(Color.BLACK);
-            r.setStroke(Color.BLACK);
+            if(r.getFill() == CELL_FILL_COLOR){
+                r.setFill(Color.GRAY);
+                r.setStroke(Color.GRAY);
+            }else if (r.getFill() == Color.GRAY) {
+                r.setFill(Color.DIMGREY);
+                r.setStroke(Color.DIMGRAY);
+            } else {
+                r.setFill(Color.BLACK);
+                r.setStroke(Color.BLACK);
+            }
         }
     }
 

@@ -7,6 +7,7 @@ public class ConwayStructureGenerator {
 
     public static final String GLIDER_GUN = createGliderGunString();
     public static final String R_PENTOMINO = createRPentomino();
+    public static final String BLOCK_LAYING_SWITCH = "";
 
     private Game game;
 
