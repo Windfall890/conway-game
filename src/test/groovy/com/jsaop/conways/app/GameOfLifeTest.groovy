@@ -5,5 +5,5 @@ import spock.lang.Specification
 
 class GameOfLifeTest extends Specification {
 
-
+ //figure out how to test javafx
 }

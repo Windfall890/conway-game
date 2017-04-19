@@ -1,27 +1,28 @@
 package com.jsaop.conways.game
 
+import com.jsaop.conways.game.world.WorldStateBounded
 import spock.lang.Specification
 
-import static Game.DEFAULT_HEIGHT
-import static Game.DEFAULT_WIDTH
 
 class GameSpec extends Specification {
 
+    static WIDTH = 5
+    static HEIGHT = 5
+
     Game game
+    WorldStateBounded state = Mock(WorldStateBounded)
 
     void setup() {
         game = new Game()
     }
 
-    def "Game provides x, y size"() {
-        expect:
-            game.getWidth() == DEFAULT_WIDTH
-            game.getHeight() == DEFAULT_HEIGHT
-    }
 
-    def "Game provides cell number"() {
+    def "Game provides default x, y size of 5x5"() {
+            state.getWidth() >> 5
+            state.getHeight() >> 5
         expect:
-            game.getNumberCells() == (DEFAULT_WIDTH * DEFAULT_HEIGHT)
+            game.getWidth() == WIDTH
+            game.getHeight() == HEIGHT
     }
 
     def "game can be created with of optional size"() {
@@ -32,13 +33,17 @@ class GameSpec extends Specification {
             game.height == 5
     }
 
+    def "Game provides cell count"() {
+        expect:
+            game.getNumberCells() == (WIDTH * HEIGHT)
+    }
+
     def "Game has current generation state"() {
         expect:
             game.state instanceof boolean[][]
-            game.state.length == DEFAULT_HEIGHT
-            game.state[0].length == DEFAULT_WIDTH
+            game.state.length == HEIGHT
+            game.state[0].length == WIDTH
     }
-
 
     def "step() kills cell with no neighbors"() {
         given:
@@ -95,4 +100,5 @@ class GameSpec extends Specification {
             game.isAlive(1, 1)
 
     }
+
 }

@@ -17,7 +17,7 @@ import javafx.util.Duration;
 
 public class GameOfLife extends Application {
     public static final int CELLS_WIDE = 150;
-    public static final int CELLS_HIGH = 150;
+    public static final int CELLS_HIGH = 100;
     public static final int CELL_DIMENSION = 3;
     public static final long DEFAULT_FRAME_DELAY = 70;
 

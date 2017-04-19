@@ -5,7 +5,7 @@ import spock.lang.Specification
 /**
  * Created by jsaop on 4/11/17.
  */
-class ConwayStructureGeneratorTest extends Specification {
+class ConwayStructureGeneratorSpec extends Specification {
 
     def mockGame = Mock(Game)
 
@@ -18,6 +18,7 @@ class ConwayStructureGeneratorTest extends Specification {
         when:
             generator.spawnFromString(".....\n.....")
         then:
+            //noinspection GroovyAssignabilityCheck
             0 * mockGame.spawn(*_)
 
     }

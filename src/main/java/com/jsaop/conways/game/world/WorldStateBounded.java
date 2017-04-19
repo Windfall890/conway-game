@@ -1,15 +1,19 @@
-package com.jsaop.conways.game;
+package com.jsaop.conways.game.world;
 
-/**
- * Created by jsaop on 4/7/17.
- */
-public class WorldState {
+public class WorldStateBounded {
+
+    public static final int DEFAULT_WIDTH = 5;
+    public static final int DEFAULT_HEIGHT = 5;
 
     private final int width;
     private final int height;
     private boolean[][] cells;
 
-    public WorldState(int width, int height) {
+    public WorldStateBounded() {
+        this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
+
+    public WorldStateBounded(int width, int height) {
         this.width = width;
         this.height = height;
         cells = new boolean[height][width];
@@ -75,8 +79,8 @@ public class WorldState {
 
     }
 
-    public WorldState copy() {
-        WorldState copy = new WorldState(width, height);
+    public WorldStateBounded copy() {
+        WorldStateBounded copy = new WorldStateBounded(width, height);
         copy.setCells(copyCells());
         return copy;
     }

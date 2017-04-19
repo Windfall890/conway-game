@@ -1,4 +1,4 @@
-package com.jsaop.conways.game;
+package com.jsaop.conways.game.world;
 
 /**
  * Created by jsaop on 4/11/17.

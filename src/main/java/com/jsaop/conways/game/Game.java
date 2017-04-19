@@ -1,11 +1,13 @@
 package com.jsaop.conways.game;
 
-public class Game {
-    public static final int DEFAULT_WIDTH = 3;
-    public static final int DEFAULT_HEIGHT = 3;
+import com.jsaop.conways.game.world.WorldStateBounded;
 
-    private WorldState currentGen;
-    private WorldState lastGen;
+public class Game {
+    public static final int DEFAULT_WIDTH = 5;
+    public static final int DEFAULT_HEIGHT = 5;
+
+    private WorldStateBounded currentGen;
+    private WorldStateBounded lastGen;
     private int generation;
 
 
@@ -14,7 +16,7 @@ public class Game {
     }
 
     public Game(int width, int height) {
-        this.currentGen = new WorldState(width, height);
+        this.currentGen = new WorldStateBounded(width, height);
         copyWorldStateToLastGen();
         this.generation = 0;
     }

@@ -1,37 +1,18 @@
 package com.jsaop.conways.game
 
+import com.jsaop.conways.game.world.WorldStateBounded
 import spock.lang.Specification
 
-class WorldStateSpec extends Specification {
+class WorldStateBoundedSpec extends Specification {
 
 
-    WorldState state
+    WorldStateBounded state
     static int DEFAULT_X = 3
     static int DEFAULT_Y = 3
 
 
     void setup() {
-        state = new WorldState(DEFAULT_X, DEFAULT_Y)
-    }
-
-
-    def "provides x, y size"() {
-        expect:
-            state.width == DEFAULT_X
-            state.height == DEFAULT_Y
-    }
-
-    def "provides cell number"() {
-        expect:
-            state.getNumberCells() == (DEFAULT_X * DEFAULT_Y)
-    }
-
-    def "state can be created with of optional size"() {
-        given:
-            state = new WorldState(5, 5)
-        expect:
-            state.width == 5
-            state.height == 5
+        state = new WorldStateBounded(DEFAULT_X, DEFAULT_Y)
     }
 
     def "WorldState has a 2D field for Cells"() {
@@ -57,7 +38,7 @@ class WorldStateSpec extends Specification {
 
     def "copy cells works"() {
         when:
-            WorldState state2 = state.copy()
+            WorldStateBounded state2 = state.copy()
         then:
             state2.width == state.width
             state2.height == state.height
