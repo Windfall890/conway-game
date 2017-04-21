@@ -18,8 +18,8 @@ import javafx.util.Duration;
 public class GameOfLife extends Application {
     public static final int CELLS_WIDE = 150;
     public static final int CELLS_HIGH = 100;
-    public static final int CELL_DIMENSION = 3;
-    public static final long DEFAULT_FRAME_DELAY = 70;
+    public static final int CELL_DIMENSION = 6;
+    public static final long DEFAULT_FRAME_DELAY = 50;
 
     private Game game;
     private GridPane grid;
@@ -39,8 +39,8 @@ public class GameOfLife extends Application {
 
 
         ConwayStructureGenerator generator = new ConwayStructureGenerator(game);
-//        generator.spawnFromStringAtOffset(ConwayStructureGenerator.GLIDER_GUN, 2, 12);
-        generator.spawnFromStringAtOffset(ConwayStructureGenerator.R_PENTOMINO, CELLS_WIDE/2, CELLS_HIGH/2);
+        generator.spawnFromStringAtOffset(ConwayStructureGenerator.GLIDER_GUN, 2, 12);
+//        generator.spawnFromStringAtOffset(ConwayStructureGenerator.R_PENTOMINO, CELLS_WIDE/2, CELLS_HIGH/2);
 //        generator.spawnFromString(".*\n.*\n.*");
 //        generator.spawnFromStringAtOffset(ConwayStructureGenerator.BLOCK_LAYING_SWITCH, CELLS_WIDE-30, CELLS_HIGH-30);
         System.out.println(game.getStateDiagram());

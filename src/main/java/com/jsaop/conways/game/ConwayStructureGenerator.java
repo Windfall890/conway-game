@@ -11,8 +11,7 @@ public class ConwayStructureGenerator {
     public ConwayStructureGenerator(Game game) {
         this.game = game;
     }
-
-
+    
     public void spawnFromString(String pattern){
         spawnFromStringAtOffset(pattern, 0, 0);
     }

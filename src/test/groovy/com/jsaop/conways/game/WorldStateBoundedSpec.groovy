@@ -5,17 +5,17 @@ import spock.lang.Specification
 
 class WorldStateBoundedSpec extends Specification {
 
-
-    WorldStateBounded state
     static int DEFAULT_X = 3
     static int DEFAULT_Y = 3
+
+    WorldStateBounded state
 
 
     void setup() {
         state = new WorldStateBounded(DEFAULT_X, DEFAULT_Y)
     }
 
-    def "WorldState has a 2D field for Cells"() {
+    def "WorldStateBounded has a 2D field for Cells"() {
         expect:
             state.cells instanceof boolean[][]
     }
